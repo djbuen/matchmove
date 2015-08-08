@@ -12,6 +12,7 @@ angular.module('slick')
     console.log($routeParams)
     $scope.post_id = $routeParams.id
     $scope.post_body = ""
+    $scope.comment_body = ""
     $scope.awesomeThings = [{
           "id": 1,
           "body": "Geppetto, a poor old wood carver, was making a puppet from a tree branch. “You shall be my little boy,” he said to the puppet, “and I shall call you ‘Pinocchio’.” He worked for hours, carefully carving each detail. When he reached the mouth, the puppet started making faces at Geppetto. “Stop that, you naughty boy,” Geppetto scolded, “Stop that at once !” “I won’t stop !” cried Pinocchio.",
@@ -67,4 +68,10 @@ angular.module('slick')
         $cookieStore.put('test', $scope.awesomeThings);
         x = $cookieStore.get('test')
         console.log(x)
+
+      $scope.addComment = (comments) ->
+        console.log(comments)
+        console.log($scope.comment_body)
+        comments.push({comment: $scope.comment_body})
+    
       

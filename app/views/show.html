@@ -21,8 +21,8 @@
     </ul>
 
   
-    <textarea type="textarea" ng-model="post_body" rows="4" cols="30"></textarea>
-    <a href="#/post" ng-click="addPost(post_body)"><button>Submit</button></a>
+    <textarea type="textarea" ng-model="comment_body" rows="4" cols="30"></textarea>
+    <a href=#/posts/{{post_id}} ng-click="addComment(posts[post_id].comments)"><button>Submit</button></a>
   </div>
 </section>
 
