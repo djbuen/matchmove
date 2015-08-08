@@ -38,11 +38,13 @@
 
     <h2>Posts<h2>
     <slick slides-to-show=1 slides-to-scroll=1 init-onload=true data="awesomeThings" class="slider multiple-items" slick-apply="slickApply">
-      <div ng-repeat="thing in awesomeThings"><p>{{ thing.body }}</p>
-      <a href="#/post/{{thing.id}}">reply</a>
+      <div ng-repeat="thing in awesomeThings"><p>{{ thing.body }}
+      </p>
+      <a href=#/posts/{{thing.id}} ><img src="images/plus.png"/></a>
+      <a href="#/" ng-click="addLikes()"><img src="images/like.png"/></a>
       </div>
     </slick>
-    <a href="#/post"><img src="images/plus.png"/></a>
+    <a href="#/post"><img src="images/plus.png" style="float:left"/></a>
     <hr/>
     
   </div>

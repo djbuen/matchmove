@@ -9,7 +9,7 @@ angular.module('slick', [
     .when '/post',
       templateUrl: 'views/post.html'
       controller: 'PostCtrl'
-    .when '/post/:id',
+    .when '/posts/:id',
       templateUrl: 'views/show.html'
       controller: 'PostCtrl'
     .otherwise 

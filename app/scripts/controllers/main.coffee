@@ -68,3 +68,6 @@ angular.module('slick')
         slidesToShow: 1
         slidesToScroll: 1
     ]
+
+    $scope.addLikes = ->
+      $scope.profile.countLikes++

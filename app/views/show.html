@@ -14,6 +14,13 @@
   <div class="content">
     <p>Reply Post</p>
     <p> {{posts[post_id].body}}</p>
+
+    Comments:
+    <ul>
+      <li ng-repeat="comment in posts[post_id].comments"><p>{{comment.comment}}</p></li>
+    </ul>
+
+  
     <textarea type="textarea" ng-model="post_body" rows="4" cols="30"></textarea>
     <a href="#/post" ng-click="addPost(post_body)"><button>Submit</button></a>
   </div>
