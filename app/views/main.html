@@ -21,15 +21,15 @@
         </tr>
         <tr>
           <td>
-            100 <br>
+            {{profile.countPosts}} <br>
             Posts
           </td>
           <td>
-            100 <br>
+            {{profile.countLikes}}<br>
             Likes
           </td>
           <td>
-            100 <br>
+            {{profile.countComments}} <br>
             Comments
           </td>
         </tr>
@@ -41,15 +41,16 @@
       <div ng-repeat="i in [1,2,3,4,5,6]"><h3>{{ i }}</h3></div>
       <p>Current index: {{ index }}</p>
     </slick>
-    <input type="textbox" ng-model="post_body"></input>
-    <a href="#" ng-click="addPost(post_body)"><img src="images/plus.png"/></a>
     <p ng-click="index=4">Change index to 4</p>
     <br>
     <hr/>
     <h2>Multiple Items</h2>
-    <slick slides-to-show=3 slides-to-scroll=3 init-onload=true data="awesomeThings" class="slider multiple-items" slick-apply="slickApply">
-      <div ng-repeat="thing in awesomeThings"><h3>{{ thing }}</h3></div>
+    <slick slides-to-show=1 slides-to-scroll=1 init-onload=true data="awesomeThings" class="slider multiple-items" slick-apply="slickApply">
+      <div ng-repeat="thing in awesomeThings"><p>{{ thing.body }}</p>
+      <a href="#/post/{{thing.id}}">reply</a>
+      </div>
     </slick>
+    <a href="#/post"><img src="images/plus.png"/></a>
     <hr/>
     <h2>One At A Time</h2>
     <slick dots="true" infinite="false" speed=300 slides-to-show=5 touch-move="false" slides-to-scroll=1 class="slider one-time">

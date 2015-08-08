@@ -1,4 +1,89 @@
 'use strict';
+angular.module('slick', [
+  'ngRoute',
+  'ngCookies'
+]).config([
+  '$routeProvider',
+  function ($routeProvider) {
+    return $routeProvider.when('/', {
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl'
+    }).when('/post', {
+      templateUrl: 'views/post.html',
+      controller: 'PostCtrl'
+    }).otherwise({ redirectTo: '/' });
+  }
+]);
+'use strict';
+/**
+ # @ngdoc function
+ # @name angularSlickApp.controller:PostCtrl
+ # @description
+ # # PostCtrl
+ # Controller of the angularSlickApp
+*/
+angular.module('slick').controller('PostCtrl', [
+  '$scope',
+  '$cookies',
+  '$cookieStore',
+  function ($scope, $cookies, $cookieStore) {
+    $scope.post_body = '';
+    $scope.awesomeThings = [
+      {
+        'id': 1,
+        'body': 'Geppetto, a poor old wood carver, was making a puppet from a tree branch. \u201cYou shall be my little boy,\u201d he said to the puppet, \u201cand I shall call you \u2018Pinocchio\u2019.\u201d He worked for hours, carefully carving each detail. When he reached the mouth, the puppet started making faces at Geppetto. \u201cStop that, you naughty boy,\u201d Geppetto scolded, \u201cStop that at once !\u201d \u201cI won\u2019t stop !\u201d cried Pinocchio.',
+        'comments': [{
+            'id': 1,
+            'comment': 'Ohh poor boy pinocchio....'
+          }]
+      },
+      {
+        'id': 2,
+        'body': '\u201cOf course I can, silly,\u201d said the puppet. \u201cYou\u2019ve given me a mouth to talk with.\u201d Pinocchio rose to his feet and danced on the table top. \u201cLook what I can do !\u201d he squealed.',
+        'comments': [{
+            'id': 1,
+            'comment': 'Pinocchio tries to rationalize'
+          }]
+      },
+      {
+        'id': 3,
+        'body': '\u201cPinocchio, this is not the time to dance,\u201d Geppetto explained. \u201cYou must get a good night\u2019s rest. Tomorrow you will start going to school with the real boys. You will learn many things, including how to behave.\u201d',
+        'comments': [{
+            'id': 1,
+            'comment': 'That\'s right!'
+          }]
+      },
+      {
+        'id': 4,
+        'body': '\u201cGet off my stage,\u201d roared the Puppet Master. Then he noticed how much the crowd liked Pinocchio. He did not say anything and let Pinocchio stay. \u201cHere, you\u2019ve earned five copper coins,\u201d the Puppet Master told Pinocchio.',
+        'comments': [{
+            'id': 1,
+            'comment': 'Earned it!'
+          }]
+      }
+    ];
+    return $scope.addPost = function (body) {
+      var last, x;
+      last = $scope.awesomeThings.length;
+      console.log($scope.awesomeThings[last - 1].id);
+      $scope.awesomeThings.push({
+        post_id: $scope.awesomeThings[last - 1].id + 1,
+        body: body,
+        comments: []
+      });
+      $cookieStore.put('test', $scope.awesomeThings);
+      x = $cookieStore.get('test');
+      return console.log(x);
+    };
+  }
+]);
+'use strict';
+/**
+ # @ngdoc directive
+ # @name angularSlickApp.directive:slick
+ # @description
+ # # slick
+*/
 angular.module('slick', []).directive('slick', [
   '$timeout',
   function ($timeout) {
@@ -49,10 +134,11 @@ angular.module('slick', []).directive('slick', [
         variableWidth: '@',
         vertical: '@',
         prevArrow: '@',
-        nextArrow: '@'
+        nextArrow: '@',
+        slickApply: '='
       },
       link: function (scope, element, attrs) {
-        var destroySlick, initializeSlick, isInitialized;
+        var destroySlick, initializeSlick, isInitialized, slickApply;
         destroySlick = function () {
           return $timeout(function () {
             var slider;
@@ -62,11 +148,15 @@ angular.module('slick', []).directive('slick', [
             return slider;
           });
         };
-        scope.slickApply = (apply)->
-          if (isInitialized) 
-            slider.unslick()
-          apply()
-          initializeSlick()
+        slickApply = function () {
+          var slider;
+          slider = $(element);
+          if (isInitialized) {
+            slider.unslick();
+          }
+          apply();
+          return initializeSlick();
+        };
         initializeSlick = function () {
           return $timeout(function () {
             var currentIndex, customPaging, slider;

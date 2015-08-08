@@ -1,0 +1,25 @@
+<div class="header">
+  <div class="header-content">
+    <h2 class="title">Matchmove</h2>
+    <ul class="nav">
+    <li>
+    <a href="#/" ng-click="addPost(post_body)">home</a>
+    </li>
+    <li></li>
+    </ul>
+  </div>
+</div>
+
+<section id="features" class="blue" ng-init="index=0">
+  <div class="content">
+    <p>Add Post</p>
+    <textarea type="textarea" ng-model="post_body" rows="4" cols="30"></textarea>
+    <a href="#/post" ng-click="addPost(post_body)"><button>Submit</button></a>
+  </div>
+</section>
+
+<section id="go-get-it" class="white">
+  <div class="content">
+    <p class="guff">Dave Buenconsejo</p>
+  </div>
+</section>
