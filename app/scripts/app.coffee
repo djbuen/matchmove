@@ -9,5 +9,8 @@ angular.module('slick', [
     .when '/post',
       templateUrl: 'views/post.html'
       controller: 'PostCtrl'
+    .when '/post/:id',
+      templateUrl: 'views/show.html'
+      controller: 'PostCtrl'
     .otherwise 
       redirectTo: '/'

@@ -11,6 +11,9 @@ angular.module('slick', [
     }).when('/post', {
       templateUrl: 'views/post.html',
       controller: 'PostCtrl'
+    }).when('/post/:id', {
+      templateUrl: 'views/show.html',
+      controller: 'PostCtrl'
     }).otherwise({ redirectTo: '/' });
   }
 ]);
@@ -26,7 +29,11 @@ angular.module('slick').controller('PostCtrl', [
   '$scope',
   '$cookies',
   '$cookieStore',
-  function ($scope, $cookies, $cookieStore) {
+  '$routeParams',
+  function ($scope, $cookies, $cookieStore, $routeParams) {
+    var i;
+    console.log($routeParams);
+    $scope.post_id = $routeParams.id;
     $scope.post_body = '';
     $scope.awesomeThings = [
       {
@@ -62,6 +69,13 @@ angular.module('slick').controller('PostCtrl', [
           }]
       }
     ];
+    $scope.posts = {};
+    i = 0;
+    while (i < $scope.awesomeThings.length) {
+      $scope.posts[$scope.awesomeThings[i].id] = $scope.awesomeThings[i];
+      i++;
+    }
+    console.log($scope.posts);
     return $scope.addPost = function (body) {
       var last, x;
       last = $scope.awesomeThings.length;
@@ -84,7 +98,7 @@ angular.module('slick').controller('PostCtrl', [
  # @description
  # # slick
 */
-angular.module('slick', []).directive('slick', [
+angular.module('slick').directive('slick', [
   '$timeout',
   function ($timeout) {
     return {

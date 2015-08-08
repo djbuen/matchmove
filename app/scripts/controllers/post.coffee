@@ -8,10 +8,11 @@
  # Controller of the angularSlickApp
 ###
 angular.module('slick')
-  .controller 'PostCtrl', ($scope, $cookies, $cookieStore) ->
+  .controller 'PostCtrl', ($scope, $cookies, $cookieStore, $routeParams) ->
+    console.log($routeParams)
+    $scope.post_id = $routeParams.id
     $scope.post_body = ""
-    $scope.awesomeThings = [
-        {
+    $scope.awesomeThings = [{
           "id": 1,
           "body": "Geppetto, a poor old wood carver, was making a puppet from a tree branch. “You shall be my little boy,” he said to the puppet, “and I shall call you ‘Pinocchio’.” He worked for hours, carefully carving each detail. When he reached the mouth, the puppet started making faces at Geppetto. “Stop that, you naughty boy,” Geppetto scolded, “Stop that at once !” “I won’t stop !” cried Pinocchio.",
           "comments": [
@@ -52,6 +53,13 @@ angular.module('slick')
           ]
         }
       ]
+
+      $scope.posts = {}
+      i=0
+      while i < $scope.awesomeThings.length
+        $scope.posts[$scope.awesomeThings[i].id] = $scope.awesomeThings[i]
+        i++
+      console.log($scope.posts)
       $scope.addPost = (body)->
         last = $scope.awesomeThings.length
         console.log($scope.awesomeThings[last-1].id)

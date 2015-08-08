@@ -9,7 +9,8 @@ angular.module('slick')
           }
     $timeout(() ->
       x = $cookieStore.get('test')
-      if x != null
+      console.log(x)
+      if x != undefined
         $scope.awesomeThings = x
       else
         $scope.awesomeThings = [{
